@@ -4,18 +4,67 @@
     <base href="/" />
     <title>Fullstack Academy Generated Application</title>
     <link rel="stylesheet" type="text/css" href="/bootstrap/dist/css/bootstrap.css" />
-    <link rel="stylesheet" type="text/css" href="/style.css" />
+    <link rel="stylesheet" type="text/css" href="/shop.css" />
+    <!-- <link rel="stylesheet" type="text/css" href="/css/style.css" /> -->
     <script src="/lodash/lodash.js"></script>
     <script src="/jquery/dist/jquery.js"></script>
     <script src="/bootstrap/dist/js/bootstrap.js"></script>
     <script src="/angular/angular.js"></script>
+    <script src="/angular-bootstrap/ui-bootstrap.js"></script>
     <script src="/angular-cookies/angular-cookies.js"></script>
     <script src="/angular-ui-router/release/angular-ui-router.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script src="/main.js"></script>
 </head>
-<body ng-app="FullstackGeneratedApp" ng-controller="MainController">
+<!-- <body ng-app="FullstackGeneratedApp" ng-controller="MainController">
     <navbar items="menuItems"></navbar>
     <div ui-view></div>
+</body> -->
+
+<body ng-app="StoreApp" ng-controller="MainCtrl">
+    <!-- Navigation -->
+
+    <navbar items="menuItems"></navbar>
+
+    <!-- Page Content -->
+    <div class="container">
+        <div class="row">
+            <!-- Categories -->
+            <category items="categories"></category>
+            <!-- end of Categories -->
+
+            <div class="col-md-9">
+                <!-- Carousel -->
+                <old-carousel items="slides">
+                {{slides}}
+                </old-carousel>
+                
+                <!-- end of Carousel -->
+
+                <!-- Partial products list -->
+                <products items="products"></products>
+                <!-- end of products list -->
+            </div>
+            <!-- end of col-md-9 -->
+
+        </div>
+        <!-- end of row -->
+
+    </div>
+    <!-- /.container -->
+
+    <div class="container">
+        <hr>
+        <!-- Footer -->
+        <footer>
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>Copyright &copy; StackStore 2015</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
 </body>
+
 </html>
