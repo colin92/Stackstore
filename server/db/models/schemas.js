@@ -1,8 +1,5 @@
 var mongoose = require('mongoose'),
 	user = require('./user');
-mongoose.connect('mongodb://localhost/stackstore');
-var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'mongodb connection error:'));
 	
 
 var productSchema = new mongoose.Schema({
@@ -39,5 +36,3 @@ module.exports = {
 	Review: mongoose.model('Review', reviewSchema),
 	User: user
 };
-
-console.log('Done!');
