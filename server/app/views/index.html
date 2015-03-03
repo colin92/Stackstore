@@ -35,10 +35,11 @@
 
             <div class="col-md-9">
                 <!-- Carousel -->
-                <old-carousel items="slides">
-                {{slides}}
-                </old-carousel>
-                
+                <carousel style="background-color: lime;" interval="myInterval">
+                    <slide ng-repeat="thing in slides" active="thing.active">  
+                        <img ng-src="{{ thing.source }}" alt="{{ thing.title }}" style="margin:auto;">
+                    </slide>
+                </carousel>
                 <!-- end of Carousel -->
 
                 <!-- Partial products list -->
