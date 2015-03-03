@@ -5,6 +5,7 @@ app.config(function ($stateProvider) {
         url: '/',
         controller: 'HomeCtrl',
         templateUrl: 'js/home/home.html'
+        
     });
 
 });
