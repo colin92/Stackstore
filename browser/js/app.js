@@ -3,7 +3,7 @@
 
 var app = angular.module("StoreApp", ['ui.bootstrap', 'ui.router', 'fsaPreBuilt']);
 
-app.controller('MainCtrl', function ($scope) {
+app.controller('MainCtrl', function ($scope, ProductFactory) {
     // Given to the <navbar> directive to show the menu.
     $scope.menuItems = [
         { label: 'Home', state: 'home' },
@@ -29,25 +29,15 @@ app.controller('MainCtrl', function ($scope) {
 
     $scope.myInterval = 4000;
 
-    $scope.products = [{
-        title: "Product number 1", 
-        description: "This is the first product", 
-        category: "Category 1", 
-        price: 24.99,
-        source: "http://placehold.it/320x150"
-    }, {
-        title: "Product number 2", 
-        description: "This is the second product", 
-        category: "Category 2", 
-        price: 14.99,
-        source: "http://placehold.it/320x150"
-    }, {
-        title: "Product number 3", 
-        description: "This is the second product", 
-        category: "Category 3", 
-        price: 34.99,
-        source: "http://placehold.it/320x150"
-    }];
+    $scope.selectProducts = function(category) {
+        ProductFactory.getProducts(category).then(function(products){
+            $scope.products = products;
+        });
+    };
+
+    // To be included in home state once states are built
+    $scope.selectProducts();
+
 });
 
 
