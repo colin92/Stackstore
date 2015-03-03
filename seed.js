@@ -1,7 +1,13 @@
-var mongoose = require('mongoose'), 
-	async = require('async'),
-	user = require('./server/db/models/user.js'),
+var mongoose = require('mongoose');
+var	async = require('async'),
 	models = require('./server/db/models/schemas.js');
+
+var path = require('path');
+
+var DATABASE_URI = require(path.join(__dirname, 'server/env')).DATABASE_URI;
+
+var db = mongoose.connect(DATABASE_URI).connection;
+
 
 var data = {
 	Product: [
