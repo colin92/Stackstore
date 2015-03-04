@@ -93,8 +93,10 @@ mongoose.connection.on('open', function() {
         async.waterfall([
         	loadingCategories,
         	getCategories,
-        	loadingOtherData
+        	loadingOtherData,
     	], function (err, result) {
+    		if (err) console.log(err);
+    		process.exit();
     	});
 
 	    function loadingCategories(callback) {
