@@ -9,27 +9,50 @@ var DATABASE_URI = require(path.join(__dirname, 'server/env')).DATABASE_URI;
 var db = mongoose.connect(DATABASE_URI).connection;
 
 
-var data = {
+var catData = {
+	Category: [
+		{name: 'African Art'},
+		{name: 'Feminist Art'},
+		{name: 'Chinese Art'},
+		{name: 'Color Fields'},
+		{name: 'Emerging Art'},
+		{name: 'Figurative Painting'},
+		{name: 'Portrait Photography'},
+		{name: 'Contemporary Pop'},
+		{name: 'Ceramics'},
+		{name: 'Art Nouveau'},
+		{name: 'Bauhaus'},
+		{name: 'Post-War American Art'},
+		{name: 'Post-War European Art'},
+		{name: 'Renaissance'},
+		{name: 'Greek and Roman Art and Architecture'},
+		{name: 'Arts of Africa, Oceania, and the Americas'},
+		{name: 'Minimalism'},
+		{name: 'Impressionism'}
+	]
+};
+
+var otherData = {
 	Product: [
 		{
 			title: 'Jeff Koons',
 			description: 'Balloon Dog (Yellow), 1994-2000',
 			price: 10000,
-			category: 'Contemporary',
+			category: 'African Art',
 			imageUrl: 'http://lorempixel.com/400/400'  
 		},
 		{
 			title: 'Damien Hirst',
 			description: 'Away from the Flock, 1994',
 			price: 5000,
-			category: 'Contemporary',
+			category: 'Chinese Art',
 			imageUrl:'http://lorempixel.com/400/400'		
 		},
 		{
 			title: 'Jeff Koons',
 			description: 'Michael Jackson and Bubbles, 1988',
 			price: 1000,
-			category: 'Contemporary',
+			category: 'Color Fields',
 			imageUrl:'http://lorempixel.com/400/400'
 		}
 	],
@@ -64,22 +87,70 @@ var data = {
 
 
 mongoose.connection.on('open', function() {
-    mongoose.connection.db.dropDatabase(function() {
-        
+    mongoose.connection.db.dropDatabase(function() {        
         console.log("Dropped old data, now inserting data");
-        async.each(Object.keys(data),
-            function(modelName, outerDone) {
-                async.each(data[modelName],
-                    function(d, innerDone) {
-                        models[modelName].create(d, innerDone);
-                    },
-                    outerDone
-                );
-            },
-            function(err) {
-                console.log("Finished inserting data");
-                console.log("Control-C to quit");
-            }
-        );
+
+        async.waterfall([
+        	loadingCategories,
+        	getCategories,
+        	loadingOtherData
+    	], function (err, result) {
+    	});
+
+	    function loadingCategories(callback) {
+	        var data = catData;
+	        async.each(Object.keys(data),
+	            function(modelName, outerDone) {
+	                async.each(data[modelName],
+	                    function(d, innerDone) {
+	                        models[modelName].create(d, innerDone);
+	                    },
+	                    outerDone
+	                );
+	            },
+	            function(err) {
+	                console.log("Finished inserting category data");
+	            }
+	        );
+	        callback(null);
+	    };
+
+
+    	function getCategories(callback) {
+    		models.Category.find().exec(function(err, categories) {
+    			callback(null, categories)
+    		})
+    	};
+
+
+	    function loadingOtherData(categories, callback) {
+	        var data = otherData;
+	        async.each(Object.keys(data),
+	            function(modelName, outerDone) {
+	                async.each(data[modelName],
+	                    function(d, innerDone) {
+	                    	if (d.category) {
+	                    		for (var i = 0; i < categories.length; i++) {
+	                    			if (d.category === categories[i].name) {
+	                    				d.category = categories[i]._id;
+	                    				break;
+	                    			}
+	                    		}
+	                    	}
+	                        models[modelName].create(d, innerDone);
+	                    },
+	                    outerDone
+	                );
+	            },
+	            function(err) {
+	                console.log("Finished inserting remaining data");
+	                console.log("Control-C to quit");
+	            }
+	        );
+	        callback(null);
+	    };
+
+
+
     });
 });
