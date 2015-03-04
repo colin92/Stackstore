@@ -1,0 +1,48 @@
+<div class="modal-header">
+    <alert ng-show="error" type="{{error.type}}">{{ error.msg }}</alert>
+    <h3 class="modal-title" ng-hide="!isLogin()">Log in</h3>
+    <h3 class="modal-title" ng-hide="isLogin()">Sign up</h3>
+</div>
+<div class="modal-body">
+    <form name="{auth}" class="form-horizontal" ng-submit="submit()">
+      <div class="form-group">
+        <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+        <div class="col-sm-10">
+          <input type="email" class="form-control" id="inputEmail3" placeholder="Email" ng-model="user.email">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+        <div class="col-sm-10">
+          <input type="password" class="form-control" id="inputPassword3" placeholder="Password" ng-model="user.password">
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <div class="checkbox">
+            <label>
+              <input type="checkbox"> Remember me, please...
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <button type="submit" class="btn btn-default" ng-hide="!isLogin()">Log in</button>
+          <button type="submit" class="btn btn-default" ng-hide="isLogin()">Sign up</button>
+          <span> or use </span>
+          <i style="font-size: 24px;" class="fa fa-facebook-square btn btn-default" ng-click="fbSubmit()"></i>
+        </div>
+      </div>
+    </form>
+    <pre>{{ user | json }}</pre>
+</div>
+<div class="modal-footer">
+    
+    <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+</div>
+
+    
+    
+
+
