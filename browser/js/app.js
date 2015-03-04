@@ -8,36 +8,8 @@ app.controller('MainCtrl', function ($scope, ProductFactory) {
     $scope.menuItems = [
         { label: 'Home', state: 'home' },
         { label: 'About', state: 'about' },
-        { label: 'Contact', state: 'contact' }
+        { label: 'Products', state: 'products.all' }
     ];
-
-    $scope.categories = [{
-        label: "Category 1", state: "category1" 
-    }, {
-        label: "Category 2", state: "category2"
-    }, {
-        label: "Category 3", state: "category3"
-    } ];
-
-    $scope.slides = [{
-        title: "img1", source: "http://placehold.it/800x300"
-    }, {
-        title: "img2", source: "http://placehold.it/800x300"
-    }, {
-        title: "img3", source: "http://placehold.it/800x300"
-    }];
-
-    $scope.myInterval = 4000;
-
-    $scope.selectProducts = function(category) {
-        ProductFactory.getProducts(category).then(function(products){
-            $scope.products = products;
-        });
-    };
-
-    // To be included in home state once states are built
-    $scope.selectProducts();
-
 });
 
 

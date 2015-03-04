@@ -1,6 +1,6 @@
 <div class="col-md-3">
     <p class="lead">StackStore</p>
     <div class="list-group">
-        <a ng-repeat="category in items" ui-sref-active="active" ui-sref="{{ category.state }}" class="list-group-item" >{{ category.label}}</a>
+        <a ng-repeat="category in items" ui-sref-active="active" ui-sref="products.category({ categoryName: category.name })" class="list-group-item" >{{ category.name }}</a>
     </div>
 </div>
