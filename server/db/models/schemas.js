@@ -6,7 +6,7 @@ var productSchema = new mongoose.Schema({
 	title: {type: String, required: true, unique: true},
 	description: String,
 	price: Number,
-	category: {type: String, required: true},
+	category: {type: mongoose.Schema.Types.ObjectId, ref: 'Category', required: true},
 	imageUrl: {type: String}
 	// What type should photo be?
 });
@@ -19,6 +19,11 @@ var orderSchema = new mongoose.Schema({
 	items: [{productId: {type: mongoose.Schema.Types.ObjectId, ref: 'Product'},
 			quantity: Number,
 			price: Number}]
+});
+
+var categorySchema = new mongoose.Schema({
+	// for each product
+	name: {type: String, required: true}
 });
 
 
@@ -34,5 +39,6 @@ module.exports = {
 	Product: mongoose.model('Product', productSchema),
 	Order: mongoose.model('Order', orderSchema),
 	Review: mongoose.model('Review', reviewSchema),
+	Category: mongoose.model('Category', categorySchema),
 	User: user
 };
