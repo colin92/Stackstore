@@ -16,6 +16,9 @@ app.controller('MainCtrl', function($scope, ProductFactory) {
   }, {
     label: 'Products',
     state: 'products.all'
+  }, {
+    label: 'Cart',
+    state: 'cart'
   }];
 
 });
