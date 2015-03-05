@@ -1,8 +1,22 @@
 'use strict';
 
-app.controller('AuthCtrl', function($scope, $modal, $log) {
+app.controller('AuthCtrl', function($scope, $modal, $log, $rootScope, AUTH_EVENTS, AuthService) {
 
+  $rootScope.$on(AUTH_EVENTS.loginSuccess, function() {
+    console.log("login success");
+    $scope.loggedIn = true;
+  });
 
+  $rootScope.$on(AUTH_EVENTS.logoutSuccess, function() {
+    console.log("logout");
+    $scope.loggedIn = false;
+  });
+
+  $scope.logout = function() {
+    AuthService.logout();
+  };
+
+  $scope.user = AuthService.getLoggedInUser();
 
   $scope.open = function(auth) {
 
@@ -33,22 +47,12 @@ app.controller('ModalInstanceCtrl', function($scope, $modalInstance, auth, AuthS
     return auth === "login";
   };
 
+
   $scope.isLogin = isLogin;
 
   $scope.auth = auth;
 
   $scope.user = {};
-
-  $scope.fbSubmit = function() {
-    AuthService.fblogin($scope.user).then(function(user) {
-      $modalInstance.close("Success!");
-    }).catch(function(error) {
-      $scope.error = {
-        type: 'danger',
-        msg: error.data.error
-      };
-    })
-  }
 
   $scope.submit = function() {
     if (isLogin()) {
@@ -68,7 +72,7 @@ app.controller('ModalInstanceCtrl', function($scope, $modalInstance, auth, AuthS
           type: 'danger',
           msg: error.data.error
         };
-      })
+      });
     }
   };
 
