@@ -1,4 +1,21 @@
 <section id="home">
-    <fullstack-logo></fullstack-logo>
-    <rando-greeting></rando-greeting>
+    <!-- Categories -->
+    <category items="categories"></category>
+    <!-- end of Categories -->
+
+    <div class="col-md-9">
+        <h1>Home Page </h1>
+        <!-- Carousel -->
+        <carousel interval="myInterval">
+            <slide ng-repeat="thing in slides" active="thing.active">  
+                <img ng-src="{{ thing.source }}" alt="{{ thing.title }}" style="margin:auto;">
+            </slide>
+        </carousel>
+        <!-- end of Carousel -->
+        <hr />
+        <!-- Partial products list -->
+        <products items="products"></products>
+        <!-- end of products list -->
+    </div>
+    <!-- end of col-md-9 -->
 </section>

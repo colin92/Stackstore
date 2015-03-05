@@ -12,19 +12,11 @@
     <script src="/angular/angular.js"></script>
     <script src="/angular-ui-router/release/angular-ui-router.js"></script>
     <script src="/angular-cookies/angular-cookies.js"></script>
-
-    <!-- // <script src="/angular-bootstrap/ui-bootstrap.js"></script> -->
-
     <script src="/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-    
     <script src="/socket.io/socket.io.js"></script>
     <script src="/main.js"></script>
     <script src="/js/common/directives/auth/auth.js"></script>
 </head>
-<!-- <body ng-app="FullstackGeneratedApp" ng-controller="MainController">
-    <navbar items="menuItems"></navbar>
-    <div ui-view></div>
-</body> -->
 
 <body ng-app="StoreApp" ng-controller="MainCtrl">
 
@@ -47,32 +39,17 @@
     </script>
 
     <!-- Navigation -->
-
     <navbar items="menuItems"></navbar>
 
     <!-- Page Content -->
     <div class="container">
+     
         <div class="row">
 
-            <alert ng-show="success" type="{{success.type}}">{{ success.msg }}</alert>
-            <!-- Categories -->
-            <category items="categories"></category>
-            <!-- end of Categories -->
-            
-            <div class="col-md-9">
-                <!-- Carousel -->
-                <carousel interval="myInterval">
-                    <slide ng-repeat="thing in slides" active="thing.active">  
-                        <img ng-src="{{ thing.source }}" alt="{{ thing.title }}" style="margin:auto;">
-                    </slide>
-                </carousel>
-                <!-- end of Carousel -->
 
-                <!-- Partial products list -->
-                <products items="products"></products>
-                <!-- end of products list -->
-            </div>
-            <!-- end of col-md-9 -->
+            <alert ng-show="success" type="{{success.type}}">{{ success.msg }}</alert>
+            
+            <ui-view></ui-view>
 
         </div>
         <!-- end of row -->
