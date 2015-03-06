@@ -101,7 +101,7 @@
         };
 
         this.fblogin = function() {
-            return $http.get('/auth/facebook').then(onSuccessfulLogin);
+            return window.location.href = '/auth/facebook';
         };
 
     });

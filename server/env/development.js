@@ -1,4 +1,4 @@
-var config = require('../../.config.js');
+// var config = require('../../.config.js');
 
 module.exports = {
   "DATABASE_URI": "mongodb://localhost:27017/my-app",
@@ -9,8 +9,8 @@ module.exports = {
     "callbackUrl": "http://127.0.0.1:1337/auth/twitter/callback"
   },
   "FACEBOOK": {
-    "clientID": config.facebook.id,
-    "clientSecret": config.facebook.secret,
+    "clientID": "743589179090386",
+    "clientSecret": "6466053cfd04d8308bea1e0edd909660",
     "callbackURL": "http://localhost:1337/auth/facebook/callback"
   },
   "GOOGLE": {
