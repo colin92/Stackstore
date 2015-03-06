@@ -1,6 +1,9 @@
 'use strict';
 
 app.controller('AuthCtrl', function($scope, $modal, $log, $rootScope, AUTH_EVENTS, AuthService) {
+  if (AuthService.isAuthenticated()) $scope.loggedIn = true;
+  else $scope.loggedIn = false;
+
 
   $rootScope.$on(AUTH_EVENTS.loginSuccess, function() {
     console.log("login success");
@@ -36,6 +39,8 @@ app.controller('AuthCtrl', function($scope, $modal, $log, $rootScope, AUTH_EVENT
       $log.info('Modal dismissed at: ' + new Date());
     });
   };
+
+  console.log("$scope.loggedIn", $scope.loggedIn);
 });
 
 // Please note that $modalInstance represents a modal window (instance) dependency.
