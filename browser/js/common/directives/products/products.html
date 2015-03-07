@@ -4,7 +4,7 @@
             <img src="{{ product.imageUrl }}" alt="{{ product.title }}">
             <div class="caption">
                 <h4 class="pull-right">${{ product.price }}</h4>
-                <h4><a href="#">{{ product.title }}</a>
+                <h4><a ui-sref="item({ item: product.title })">{{ product.title }}</a>
                 </h4>
                 <p>{{ product.description }}</p>
             </div>

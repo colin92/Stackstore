@@ -1,17 +1,19 @@
 <section id="home">
-    {{singleProduct}}
+    {{item}}
     <row>
     <div class="col-md-6">
         <!-- image -->
-        <img ng-src="{{singleProduct.imageUrl}}">
+        <img ng-src="{{item.imageUrl}}">
         
 
     </div>
     <div class="col-md-6">
         <!-- description -->
-        <p>{{singleProduct.title}}</p>
-        <p>{{singleProduct.description}}</p>
-        <p>{{singleProduct.price}}</p>
+        <h1>{{item.title}}</h1>
+        <p>description: {{item.description}}</p>
+        <h4>price: ${{item.price}}</h4>
+
+        <a class="btn btn-success" ng-click="addToCart(sessionId, item)" role="button">Add to cart</a> 
 
     </div>
     </row>

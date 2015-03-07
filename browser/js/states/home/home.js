@@ -4,7 +4,7 @@ app.config(function($stateProvider) {
     $stateProvider.state('home', {
         url: '/',
         controller: 'HomeCtrl',
-        templateUrl: 'js/home/home.html'
+        templateUrl: 'js/states/home/home.html'
 
     });
 
@@ -32,12 +32,12 @@ app.controller('HomeCtrl', function($scope, ProductFactory) {
     $scope.myInterval = 4000;
 
 
-    $scope.selectProducts = function(category) {
-        ProductFactory.getProducts(category).then(function(products) {
-            $scope.products = products;
-        });
-    };
+    // $scope.selectProducts = function(category) {
+    //     ProductFactory.getProducts(category).then(function(products) {
+    //         $scope.products = products;
+    //     });
+    // };
 
-    // To be included in home state once states are built
-    $scope.selectProducts();
+    // // To be included in home state once states are built
+    // $scope.selectProducts();
 });

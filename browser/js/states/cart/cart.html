@@ -1,0 +1,27 @@
+<div ng-controller="AuthCtrl">
+	<row>
+		<div class="col-md-3">
+			<img src="http://lorempixel.com/200/100">
+			<!-- {{orders}} -->
+		</div>
+		<div class="col-md-9">
+			<div ng-hide="loggedIn">
+				<ul ng-repeat="item in orders">
+					<li>
+						<h2>{{item.title}}</h2>
+						<p>Price: {{item.price}}</p>
+						<p>Description: {{item.description}}</p>
+						<!-- <p>Category: {{item.category}}</p> -->
+					</li>
+				</ul> 
+			</div>
+			
+			<div ng-repeat="item in orders" ng-show="loggedIn">
+				{{ item.productId }} - {{ item.price }}  
+			</div>
+		</div>
+		<div class="col-md-2">
+		</div>
+
+	<row>
+</div>

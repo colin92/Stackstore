@@ -1,11 +1,9 @@
 'use strict';
-// var app = angular.module('FullstackGeneratedApp', ['ui.router', 'fsaPreBuilt']);
 
-var app = angular.module("StoreApp", ['ui.bootstrap', 'ui.router', 'fsaPreBuilt']);
+var app = angular.module("StoreApp", ['ui.bootstrap', 'ui.router', 'fsaPreBuilt', 'ngKookies']);
 
+app.controller('MainCtrl', function($scope, ProductFactory, AuthService, Session, $kookies, OrderFactory) {
 
-
-app.controller('MainCtrl', function($scope, ProductFactory) {
   // Given to the <navbar> directive to show the menu.
   $scope.menuItems = [{
     label: 'Home',
@@ -21,6 +19,17 @@ app.controller('MainCtrl', function($scope, ProductFactory) {
     state: 'cart'
   }];
 
+  $scope.sessionId = Session.id;
+  console.log($scope.sessionId);
+
+  ProductFactory.getProducts().then(function (products) {
+    $scope.products = products;
+  });
+
+  $scope.addToCart = function (sessionId, item) {
+
+    OrderFactory.addToCart(sessionId, item);
+  }
 });
 
 
@@ -30,3 +39,9 @@ app.config(function($urlRouterProvider, $locationProvider) {
   // If we go to a URL that ui-router doesn't have registered, go to the "/" url.
   $urlRouterProvider.otherwise('/');
 });
+
+app.config(['$kookiesProvider', 
+  function ($kookiesProvider) {
+      $kookiesProvider.config.json = true;
+  }
+]);
