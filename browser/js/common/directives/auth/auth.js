@@ -38,9 +38,12 @@ app.controller('AuthCtrl', function($scope, $modal, $log, $rootScope, AUTH_EVENT
     }, function() {
       $log.info('Modal dismissed at: ' + new Date());
     });
+
+
   };
 
   console.log("$scope.loggedIn", $scope.loggedIn);
+
 });
 
 // Please note that $modalInstance represents a modal window (instance) dependency.
@@ -84,4 +87,5 @@ app.controller('ModalInstanceCtrl', function($scope, $modalInstance, auth, AuthS
   $scope.cancel = function() {
     $modalInstance.dismiss('cancel');
   };
+
 });

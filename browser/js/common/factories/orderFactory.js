@@ -17,7 +17,7 @@ app.factory('OrderFactory', function($http, $kookies, AuthService) {
 		},
 		addToCart: function(sessionId, item) {
 			console.log("did we get item", item);
-			if (!$kookies.get('cart')) {
+			if (!currentCart) {
 				$kookies.set('cart', {
 					items: []
 				}, {
@@ -29,7 +29,6 @@ app.factory('OrderFactory', function($http, $kookies, AuthService) {
 				console.log(currentCart);
 				alert("Item added to cart!");
 			} else {
-				var currentCart = $kookies.get('cart');
 				currentCart.items.push(item);
 				console.log(currentCart);
 				$kookies.set('cart', currentCart);
@@ -42,11 +41,6 @@ app.factory('OrderFactory', function($http, $kookies, AuthService) {
 		},
 		removeFromCart: function(sessionId, item) {
 				console.log("did we get item", item);
-				// var currentCart = $kookies.get("cart");
-				// var itemSelected = _.find(currentCart.items, function(i) {
-				// 	return i._id === item._id;
-				// });
-				// console.log("selected Item", itemSelected);
 				var i;
 				currentCart.items.some(function(entry, index) {
 					if (entry._id === item._id) {

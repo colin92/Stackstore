@@ -11,15 +11,17 @@
 						<p>Description: {{item.description}}</p>
 						<!-- <p>Category: {{item.category}}</p> -->
 						<img class="img-rounded img-responsive" src="{{ item.imageUrl }}"/>
-						<button type="button" class="btn btn-danger" ng-click="removeFromCart(sessionId, item)">remove</button>
+						<button type="button" class="btn btn-danger" ng-click="removeFromCart(sessionId, item)">Remove</button>
+						<button type="button" class="btn btn-primary" ng-click="open('login')">Proceed to the Checkout area or login, or signup.</button>
 					</li>
 				</ul> 
+
+				
 			</div>
 			
 			<div ng-repeat="item in cartItems" ng-show="loggedIn">
 				{{ item.productId }} - {{ item.price }}  
 			</div>
-			<button type="button" class="btn btn-primary">Checkout</button>
 		</div>
 		
 	<row>

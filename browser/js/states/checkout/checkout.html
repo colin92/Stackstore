@@ -1,0 +1,25 @@
+<section id="checkout">
+  <div>
+    <tabset justified="true">
+      <tab heading="Shipping" ui-sref="checkout.shipping">
+        <h3>Shipping</h3>
+        <!-- <div ui-view="shpping_html"></div> -->
+      </tab>
+      <tab heading="Billing" ui-sref="checkout.billing">
+        <h3>Billing</h3>
+        <!-- <div ui-view></div> -->
+      </tab>
+      <tab heading="Review" ui-sref="checkout.review">
+        <h3>Review</h3>
+        <!-- <div ui-view></div> -->
+      </tab>
+      <tab heading="Confirmation" ui-sref="checkout.confirm">
+        <h3>Confirmation</h3>
+        <!-- <div ui-view></div> -->
+      </tab>
+    </tabset>
+  </div>
+  <div id="content">
+    <ui-view></ui-view>
+  </div>
+</section>

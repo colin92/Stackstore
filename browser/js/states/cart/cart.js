@@ -16,7 +16,7 @@ app.controller('CartCtrl', function($scope, OrderFactory, AuthService, $kookies)
 	// });
 
 	if (!AuthService.isAuthenticated()) {
-		$scope.cart = $kookies.get('cart');
+		$scope.cart = OrderFactory.getCart();
 		$scope.cartItems = OrderFactory.getCart().items;
 	}
 });
