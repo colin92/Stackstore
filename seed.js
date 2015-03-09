@@ -2,7 +2,11 @@ var mongoose = require('mongoose');
 var async = require('async'),
   models = require('./server/db/models/schemas.js');
 
+var _ = require('lodash');
+
 var path = require('path');
+
+var artsyPull = require('./server/db/artsyPull.js');
 
 var DATABASE_URI = require(path.join(__dirname, 'server/env')).DATABASE_URI;
 
@@ -10,41 +14,17 @@ var db = mongoose.connect(DATABASE_URI).connection;
 
 var catData = {
   Category: [{
-    name: 'African Art'
+    name: 'Sculpture'
   }, {
-    name: 'Feminist Art'
+    name: 'Works on Paper'
   }, {
-    name: 'Chinese Art'
+    name: 'Photography'
   }, {
-    name: 'Color Fields'
+    name: 'Design/Decorative Art'
   }, {
-    name: 'Emerging Art'
+    name: 'Artifact/Functional Object'
   }, {
-    name: 'Figurative Painting'
-  }, {
-    name: 'Portrait Photography'
-  }, {
-    name: 'Contemporary Pop'
-  }, {
-    name: 'Ceramics'
-  }, {
-    name: 'Art Nouveau'
-  }, {
-    name: 'Bauhaus'
-  }, {
-    name: 'Post-War American Art'
-  }, {
-    name: 'Post-War European Art'
-  }, {
-    name: 'Renaissance'
-  }, {
-    name: 'Greek and Roman Art and Architecture'
-  }, {
-    name: 'Arts of Africa, Oceania, and the Americas'
-  }, {
-    name: 'Minimalism'
-  }, {
-    name: 'Impressionism'
+    name: 'Painting'
   }]
 };
 
@@ -102,9 +82,10 @@ mongoose.connection.on('open', function() {
       loadingCategories,
       getCategories,
       loadingOtherData,
+      artsySeed
     ], function(err, result) {
       if (err) console.log(err);
-
+      console.log('finished, press Control-C to quit.');
     });
 
     function loadingCategories(callback) {
@@ -154,13 +135,29 @@ mongoose.connection.on('open', function() {
         },
         function(err) {
           console.log("Finished inserting remaining data");
-          console.log("Control-C to quit");
           // process.exit();
         }
       );
-      callback(null);
+      setTimeout(function() {
+        callback(null, categories);
+      }, 200);
     };
 
+    function artsySeed(categories, callback) {
+      var findCategory = function findCategory(cat) {
+        var foundCat = _.find(categories, function(currCategory, index, arr) {
+          if(cat === 'Work on Paper' && currCategory.name === 'Works on Paper') return true;
+          return cat === currCategory.name;   
+        });
+        if(!foundCat) {
+          foundCat = new models.Category({name: cat});
+          foundCat.save;
+        }
+        return foundCat._id;
+      }
+      artsyPull(findCategory);
+      callback(null);
+    }
 
 
   });
