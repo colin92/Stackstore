@@ -4,11 +4,12 @@ var mongoose = require('mongoose'),
 
 var productSchema = new mongoose.Schema({
 	title: {type: String, required: true, unique: true},
-	description: String,
-	price: Number,
-	category: {type: mongoose.Schema.Types.ObjectId, ref: 'Category', required: true},
-	imageUrl: {type: String}
-	// What type should photo be?
+	category: String, //{type: mongoose.Schema.Types.ObjectId, ref: 'Category', required: true},
+	medium: String,
+	date: String,
+	imageUrl: String,
+	thumbnailUrl: String,
+	price: Number
 });
 
 

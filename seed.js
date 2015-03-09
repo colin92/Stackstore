@@ -49,25 +49,25 @@ var catData = {
 };
 
 var otherData = {
-  Product: [{
-    title: 'Jeff Koons',
-    description: 'Balloon Dog (Yellow), 1994-2000',
-    price: 10000,
-    category: 'African Art',
-    imageUrl: 'http://www.nova68.com/Merchant2/graphics/00000001/modern-bookend-balloon-shape-dog.jpg'
-  }, {
-    title: 'Damien Hirst',
-    description: 'Away from the Flock, 1994',
-    price: 5000,
-    category: 'Chinese Art',
-    imageUrl: 'http://lorempixel.com/400/400'
-  }, {
-    title: 'Jeff Koons',
-    description: 'Michael Jackson and Bubbles, 1988',
-    price: 1000,
-    category: 'Color Fields',
-    imageUrl: 'http://lorempixel.com/400/400'
-  }],
+  // Product: [{
+  //   title: 'Jeff Koons',
+  //   description: 'Balloon Dog (Yellow), 1994-2000',
+  //   price: 10000,
+  //   category: 'African Art',
+  //   imageUrl: 'http://www.nova68.com/Merchant2/graphics/00000001/modern-bookend-balloon-shape-dog.jpg'
+  // }, {
+  //   title: 'Damien Hirst',
+  //   description: 'Away from the Flock, 1994',
+  //   price: 5000,
+  //   category: 'Chinese Art',
+  //   imageUrl: 'http://lorempixel.com/400/400'
+  // }, {
+  //   title: 'Jeff Koons',
+  //   description: 'Michael Jackson and Bubbles, 1988',
+  //   price: 1000,
+  //   category: 'Color Fields',
+  //   imageUrl: 'http://lorempixel.com/400/400'
+  // }],
   Review: [{
     title: 'Beautiful',
     body: '... but too expensive for me',
