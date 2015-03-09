@@ -1,47 +1,75 @@
 'use strict';
 
-app.factory('OrderFactory', function($http, $kookies, AuthService){
+app.factory('OrderFactory', function($http, $kookies, AuthService) {
+	var currentCart = $kookies.get('cart');
 	return {
-		addToOrder: function (sessionId, item) {
-			return $http.post('api/orders/' + sessionId + '/add', {data: item})
-						.success(function (data, status) {
-							console.log("returned data from add to cart", data);
-							alert("Item added to cart");
-						});
+		getCart: function() {
+			return currentCart;
 		},
-		addToCart: function (sessionId, item) {
-		    console.log("did we get item", item);
-		    if (!$kookies.get('cart')) {
-		      $kookies.set('cart', {
-		        items: []
-		      }, {
-		        expires: 60,
-		        path: '/'
-		      }); 
+		addToOrder: function(sessionId, item) {
+			return $http.post('api/orders/' + sessionId + '/add', {
+					data: item
+				})
+				.success(function(data, status) {
+					console.log("returned data from add to cart", data);
+					alert("Item added to cart");
+				});
+		},
+		addToCart: function(sessionId, item) {
+			console.log("did we get item", item);
+			if (!$kookies.get('cart')) {
+				$kookies.set('cart', {
+					items: []
+				}, {
+					expires: 60,
+					path: '/'
+				});
 
-		      var newKookie = $kookies.get('cart');
-		      newKookie.items.push(item);
-		      console.log(newKookie);
-		      alert("Item added to cart!");
-		    } else {
-		      var newKookie = $kookies.get('cart');
-		      newKookie.items.push(item);
-		      console.log(newKookie);
-		      $kookies.set('cart', newKookie);
-		      alert("Item added to cart!");
-		    }
+				currentCart.items.push(item);
+				console.log(currentCart);
+				alert("Item added to cart!");
+			} else {
+				var currentCart = $kookies.get('cart');
+				currentCart.items.push(item);
+				console.log(currentCart);
+				$kookies.set('cart', currentCart);
+				alert("Item added to cart!");
+			}
 
-		    if (AuthService.isAuthenticated()) {
-		    	OrderFactory.addToOrder(sessionId, item);
-		    }
-		}
- 		// 	getOrders: function(sessionId) {
-		// 	// console.log('/api/orders/' + sessionId);
-		// 	return $http.get('/api/orders/' + sessionId).then(function(orders){
-		// 		// console.log(orders.data);
-		// 		console.log(orders);
-		// 		return orders.data;
-		// 	});
-		// }
+			if (AuthService.isAuthenticated()) {
+				OrderFactory.addToOrder(sessionId, item);
+			}
+		},
+		removeFromCart: function(sessionId, item) {
+				console.log("did we get item", item);
+				// var currentCart = $kookies.get("cart");
+				// var itemSelected = _.find(currentCart.items, function(i) {
+				// 	return i._id === item._id;
+				// });
+				// console.log("selected Item", itemSelected);
+				var i;
+				currentCart.items.some(function(entry, index) {
+					if (entry._id === item._id) {
+						i = index;
+						return i;
+					}
+				});
+				console.log("index of selected item object", i);
+
+				var deleted = currentCart.items.splice(i, 1);
+				console.log("deleted item is: ", deleted);
+				console.log("was currentCart updated?", currentCart.items);
+
+				$kookies.set('cart', currentCart);
+				alert("Item '" + deleted[0].title + "' was deleted from your cart!");
+			}
+			// 	getOrders: function(sessionId) {
+			// 	// console.log('/api/orders/' + sessionId);
+			// 	return $http.get('/api/orders/' + sessionId).then(function(orders){
+			// 		// console.log(orders.data);
+			// 		console.log(orders);
+			// 		return orders.data;
+			// 	});
+			// }
 	};
 });

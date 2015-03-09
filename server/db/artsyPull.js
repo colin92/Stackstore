@@ -1,10 +1,12 @@
+"use strict";
+
 var bluebird = require('bluebird'),
     request = bluebird.promisifyAll(require('request')),
     dbconnection = require('./index.js'),
     mongoose = require('mongoose'),
     async = require('async');
 
-var models = require('./models/schemas'); 
+var models = require('./models/schemas');
 var Product = mongoose.model('Product');
 
 var c = console.log.bind(console);
@@ -23,9 +25,9 @@ request.getAsync({
         'X-Xapp-Token': xappToken,
         'Accept': 'application/vnd.artsy-v2+json'
     }
-}).spread(function (response, body) {
+}).spread(function(response, body) {
 
-    var requestArtwork = function (link) {
+    var requestArtwork = function(link) {
         return request.getAsync({
             url: link,
             headers: {
@@ -38,44 +40,46 @@ request.getAsync({
     var body = JSON.parse(body);
     var artworks = body._embedded.artworks;
 
-    var artworkInfo = artworks.map(function (artwork) {
+    var artworkInfo = artworks.map(function(artwork) {
         return {
             title: artwork.title,
             category: artwork.category,
             medium: artwork.medium,
             date: artwork.date,
-            imageUrl: artwork._links.curies[0].href.replace('{rel}','larger.jpg'),
+            imageUrl: artwork._links.curies[0].href.replace('{rel}', 'larger.jpg'),
             thumbnailUrl: artwork._links.thumbnail.href
         };
     });
 
-    var links = artworks.map(function (art) {
+    var links = artworks.map(function(art) {
         return art._links.artists.href;
     }).map(requestArtwork);
 
-    bluebird.all(links).then(function (responses) {
+    bluebird.all(links).then(function(responses) {
 
-        var parseBody = function (response) {
+        var parseBody = function(response) {
             var bodyString = response[1];
             return JSON.parse(bodyString);
         };
 
-        var artists = responses.map(parseBody).map(function (response) {
+        var artists = responses.map(parseBody).map(function(response) {
             var artist = response._embedded.artists[0];
             var artistInfo;
             if (artist) {
                 artistInfo = {
                     name: artist.name,
-                    nationality: artist.nationality};
-                } else {
-                    artistInfo = {
+                    nationality: artist.nationality
+                };
+            } else {
+                artistInfo = {
                     name: 'Unknown',
-                    nationality: ''};
+                    nationality: ''
+                };
             }
             return artistInfo;
         });
 
-        artworkInfo.forEach(function (artwork, index) {
+        artworkInfo.forEach(function(artwork, index) {
             artwork.artistName = artists[index].name;
             artwork.artistNationality = artists[index].nationality;
         });
@@ -102,8 +106,6 @@ request.getAsync({
                 console.log("Control-C to quit");
             }
         );
-
-
 
 
 

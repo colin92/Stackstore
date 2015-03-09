@@ -2,7 +2,7 @@
 
 var app = angular.module("StoreApp", ['ui.bootstrap', 'ui.router', 'fsaPreBuilt', 'ngKookies']);
 
-app.controller('MainCtrl', function($scope, ProductFactory, AuthService, Session, $kookies, OrderFactory) {
+app.controller('MainCtrl', function($scope, ProductFactory, AuthService, Session, $kookies, OrderFactory, $window) {
 
   // Given to the <navbar> directive to show the menu.
   $scope.menuItems = [{
@@ -22,14 +22,19 @@ app.controller('MainCtrl', function($scope, ProductFactory, AuthService, Session
   $scope.sessionId = Session.id;
   console.log($scope.sessionId);
 
-  ProductFactory.getProducts().then(function (products) {
+  ProductFactory.getProducts().then(function(products) {
     $scope.products = products;
   });
 
-  $scope.addToCart = function (sessionId, item) {
+  console.log("here are all cookies", $kookies.get());
 
+  $scope.addToCart = function(sessionId, item) {
     OrderFactory.addToCart(sessionId, item);
-  }
+  };
+
+  $scope.removeFromCart = function(sessionId, item) {
+    OrderFactory.removeFromCart(sessionId, item);
+  };
 });
 
 
@@ -40,8 +45,8 @@ app.config(function($urlRouterProvider, $locationProvider) {
   $urlRouterProvider.otherwise('/');
 });
 
-app.config(['$kookiesProvider', 
-  function ($kookiesProvider) {
-      $kookiesProvider.config.json = true;
+app.config(['$kookiesProvider',
+  function($kookiesProvider) {
+    $kookiesProvider.config.json = true;
   }
 ]);
