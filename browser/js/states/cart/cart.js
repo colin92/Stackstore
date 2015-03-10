@@ -17,6 +17,6 @@ app.controller('CartCtrl', function($scope, OrderFactory, AuthService, $kookies)
 
 	if (!AuthService.isAuthenticated()) {
 		$scope.cart = OrderFactory.getCart();
-		$scope.cartItems = OrderFactory.getCart().items;
+		$scope.cartItems = $scope.cart.items;
 	}
 });

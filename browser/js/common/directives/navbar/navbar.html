@@ -15,7 +15,10 @@
 
             <ul class="nav navbar-nav">
                 <li ng-repeat="item in items">
-                    <a ui-sref-active="active" ui-sref="{{ item.state }}">{{ item.label }}</a>
+                    <a ui-sref-active="active" ui-sref="{{ item.state }}">
+                        <i class="{{ item.glyphicon }}"></i>
+                        {{ item.label }}
+                    </a>
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">

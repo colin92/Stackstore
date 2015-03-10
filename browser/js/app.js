@@ -7,20 +7,24 @@ app.controller('MainCtrl', function($scope, ProductFactory, AuthService, Session
   // Given to the <navbar> directive to show the menu.
   $scope.menuItems = [{
     label: 'Home',
-    state: 'home'
+    state: 'home',
+    glyphicon: 'glyphicon glyphicon-home'
   }, {
     label: 'About',
-    state: 'about'
+    state: 'about',
+    glyphicon: 'glyphicon glyphicon-info-sign'
   }, {
     label: 'Products',
-    state: 'products.all'
+    state: 'products.all',
+    glyphicon: 'glyphicon glyphicon-gift'
   }, {
     label: 'Cart',
-    state: 'cart'
+    state: 'cart',
+    glyphicon: 'glyphicon glyphicon-shopping-cart'
   }];
 
   $scope.sessionId = Session.id;
-  console.log($scope.sessionId);
+  console.log("this is session id", $scope.sessionId);
 
   ProductFactory.getProducts().then(function(products) {
     $scope.products = products;
