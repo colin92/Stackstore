@@ -11,7 +11,10 @@ app.config(function ($stateProvider) {
 	$stateProvider.state('products.all', {
 		url: '/',
     	controller: 'AllProductsCtrl',
-    	template: '<products items="products"></products>'
+    	template: '<products></products>',
+        resolve: {
+
+        }
     });    
 
     $stateProvider.state('products.category', {
