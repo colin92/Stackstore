@@ -32,12 +32,18 @@
           <button type="submit" class="btn btn-default" ng-hide="isLogin()">Sign up</button>
           <span> or use </span>
           <a ng-href="/auth/facebook" target="_self"><i style="font-size: 24px;" class="fa fa-facebook-square"></i></a>
-          <span> or </span>
-          <a ng-href="/auth/facebook" target="_self"><i style="font-size: 24px;" class="fa fa-facebook-square"></i></a>
         </div>
       </div>
     </form>
     <pre>{{ user | json }}</pre>
+    <div class="panel panel-default">
+      <div class="panel-heading"><h3>Guest Customers</h3></div>
+      <div class="panel-body">
+        
+        <p>Continue to checkout without signing in</p>
+        <button type="button" class="btn btn-info" ui-sref="checkout.shipping" ng-click="cancel()">Continue as guest</button>
+      </div>
+    </div>
 </div>
 <div class="modal-footer">
     

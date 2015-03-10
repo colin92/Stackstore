@@ -14,8 +14,13 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
             <ul class="nav navbar-nav">
-                <li ng-repeat="item in menuItems">
-                    <a ui-sref-active="active" ui-sref="{{ item.state }}">{{ item.label }}</a>
+
+                <li ng-repeat="item in items">
+                    <a ui-sref-active="active" ui-sref="{{ item.state }}">
+                        <i class="{{ item.glyphicon }}"></i>
+                        {{ item.label }}
+                    </a>
+
                 </li>
             </ul>
             <form class="navbar-form navbar-left" role="search">

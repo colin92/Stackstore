@@ -1,12 +1,24 @@
 'use strict';
 
-app.controller('AuthCtrl', function($scope, $modal, $log, $rootScope, $state, AUTH_EVENTS, AuthService) {
+
+app.controller('AuthCtrl', function($scope, $modal, $log, $rootScope, AUTH_EVENTS, AuthService, OrderFactory) {
   if (AuthService.isAuthenticated()) $scope.loggedIn = true;
   else $scope.loggedIn = false;
 
+  $scope.loginSendCookies = function() {
+    console.log("main controller loginSendCookies called");
+    var currentCart = OrderFactory.getCart();
+    console.log("Throwing cookie cart items to database:", currentCart.items);
+    OrderFactory.sendToOrder(currentCart.items);
+  };
+
+
   $rootScope.$on(AUTH_EVENTS.loginSuccess, function() {
+    // as soon as you log in, send cookie cart items to db
+    console.log("just logged in hi");
+    $scope.loginSendCookies();
     console.log("login success");
-    console.log('Scope',$scope)
+    console.log('Scope', $scope)
     logUserIn();
     $scope.loggedIn = true;
     $scope.$digest;
@@ -20,7 +32,7 @@ app.controller('AuthCtrl', function($scope, $modal, $log, $rootScope, $state, AU
 
   $scope.updateSearch = function(search) {
     $rootScope.search = search
-    console.log('broadcast:',$scope.search, search);
+    console.log('broadcast:', $scope.search, search);
     $rootScope.$emit('refreshProducts', search);
   }
 
@@ -29,7 +41,7 @@ app.controller('AuthCtrl', function($scope, $modal, $log, $rootScope, $state, AU
   };
 
   function logUserIn() {
-    AuthService.getLoggedInUser().then(function(user){
+    AuthService.getLoggedInUser().then(function(user) {
       $scope.user = user.user;
     });
   }
@@ -52,9 +64,12 @@ app.controller('AuthCtrl', function($scope, $modal, $log, $rootScope, $state, AU
     }, function() {
       $log.info('Modal dismissed at: ' + new Date());
     });
+
+
   };
 
   console.log("$scope.loggedIn", $scope.loggedIn);
+
 });
 
 // Please note that $modalInstance represents a modal window (instance) dependency.
@@ -85,6 +100,7 @@ app.controller('ModalInstanceCtrl', function($scope, $modalInstance, auth, AuthS
       });
     } else {
       AuthService.signup($scope.user).then(function() {
+        // as soon as you create account & log in, send cookie cart items to db
         $modalInstance.close("Success!");
       }).catch(function(error) {
         $scope.error = {
@@ -98,4 +114,5 @@ app.controller('ModalInstanceCtrl', function($scope, $modalInstance, auth, AuthS
   $scope.cancel = function() {
     $modalInstance.dismiss('cancel');
   };
+
 });
