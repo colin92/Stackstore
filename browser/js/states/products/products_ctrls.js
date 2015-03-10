@@ -10,11 +10,25 @@ app.controller('ProductsCtrl', function ($scope, $stateParams, $state, ProductFa
 
 });
 
-app.controller('AllProductsCtrl', function ($scope, ProductFactory) {
+app.controller('AllProductsCtrl', function ($scope, $state, $rootScope, ProductFactory) {
+	// $scope.searchFilter = function(sTerm) {
+	// 	return $scope.search === sTerm.title;
+	// };
+
+	// $scope.$watch($scope.search, function() {
+	// 	$scope.$digest();
+	// });
+	$rootScope.$on('refreshProducts', function(search) {
+	  $scope.search = $rootScope.search;
+	  $state.go($state.current, {}, {reload: true});
+	  console.log($scope.search, search);
+	});
+	
 
 	ProductFactory.getProducts().then(function (products) {
 		console.log("we get back products", products);
 		$scope.products = products;
+
 	});
 
 });

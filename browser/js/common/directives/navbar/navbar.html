@@ -14,20 +14,36 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
             <ul class="nav navbar-nav">
-                <li ng-repeat="item in items">
+                <li ng-repeat="item in menuItems">
                     <a ui-sref-active="active" ui-sref="{{ item.state }}">{{ item.label }}</a>
                 </li>
             </ul>
+            <form class="navbar-form navbar-left" role="search">
+              <div class="form-group">
+                <input type="text" class="form-control" ng-model="search" ng-model-options="{ debounce: {'default': 300 , 'blur': 0} }"ng-change="updateSearch(search)" placeholder="Search" />
+                <!-- Replace Search with <i class="glyphicon glyphicon-user form-control-feedback"></i> -->
+              </div>
+            </form>
             <ul class="nav navbar-nav navbar-right">
                 <li ng-hide="loggedIn">
                     <a ng-click="open('login')">Login</a>
                     
                 </li>
+                <!-- Admin dashboard -->
+                <!-- Replace ng-click for Dashboard -->
                 <li ng-hide="loggedIn">
                     <a ng-click="open('signup')">Signup</a>
                 </li>
                 <li ng-show="loggedIn">
-                    <h1>{{ user.email }}</h1>
+                    <a>{{ user.email }}</a>
+                </li>
+                <!-- <li ng-show="user.admin">
+                    <a ui-sref="admin">Dashboard</a> 
+                </li> -->
+                <li class="dropdown" ng-show="user.admin">
+                    <a>
+                        <dropdown></dropdown>
+                    </a>
                 </li>
                 <li ng-show="loggedIn">
                     <a ng-click="">Account</a>

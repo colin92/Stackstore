@@ -2,7 +2,7 @@
 
 var app = angular.module("StoreApp", ['ui.bootstrap', 'ui.router', 'fsaPreBuilt', 'ngKookies']);
 
-app.controller('MainCtrl', function($scope, ProductFactory, AuthService, Session, $kookies, OrderFactory) {
+app.controller('MainCtrl', function($scope, ProductFactory, AuthService, Session, $kookies, OrderFactory, $state) {
 
   // Given to the <navbar> directive to show the menu.
   $scope.menuItems = [{
@@ -18,6 +18,28 @@ app.controller('MainCtrl', function($scope, ProductFactory, AuthService, Session
     label: 'Cart',
     state: 'cart'
   }];
+
+  $scope.dashboard = {
+    states: [
+      {
+        label: 'Site',
+        state: 'admin.site'
+      },
+      {
+        label: 'Products',
+        state: 'admin.products'        
+      },
+      {
+        label: 'Orders',
+        state: 'admin.orders'
+      },
+      {
+        label: 'Users',
+        state: 'admin.users'
+      }
+    ]
+  }
+
 
   $scope.sessionId = Session.id;
   console.log($scope.sessionId);
