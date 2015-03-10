@@ -87,7 +87,7 @@
             <div class="col-sm-offset-2 col-sm-10">
               <div class="pull-right">
                 <button type="submit" class="btn btn-primary">Save</button>
-                <button class="btn btn-default" ng-click="nextForm()">Next</button>
+                <button class="btn btn-default" ui-sref="{{ tabs[1].state }}" ng-click="tabs[1].active = true">Next</button>
               </div>
             </div>
           </div>

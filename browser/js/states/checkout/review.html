@@ -46,10 +46,6 @@
       </div>
       <div class="panel-body">
         <p>Name: {{ billingInfo.firstName }} {{ billingInfo.lastName }}</p>
-        <p>Address: {{ billingInfo.address1 }}</p>
-        <p>{{ billingInfo.address2 }}</p>
-        <p>{{ billingInfo.city }}, {{ billingInfo.state }}</p>
-        <p>{{ billingInfo.country }}</p>
       </div>
     </div>
   </div>
@@ -58,5 +54,7 @@
 
 </row>
 <row>
-  <div id="billing-info"></div>
+  <div>
+    <button class="btn btn-default" ui-sref="{{ tabs[3].state }}" ng-click="tabs[3].active = true">Next</button>
+  </div>
 </row>

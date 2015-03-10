@@ -33,7 +33,10 @@ app.factory('OrderFactory', function($http, $kookies, AuthService) {
 			} else {
 				currentCart.items.push(item);
 				console.log(currentCart);
-				$kookies.set('cart', currentCart);
+				$kookies.set('cart', currentCart, {
+					expires: 60,
+					path: '/'
+				});
 				alert("Item added to cart!");
 			}
 
@@ -56,13 +59,19 @@ app.factory('OrderFactory', function($http, $kookies, AuthService) {
 			console.log("deleted item is: ", deleted);
 			console.log("was currentCart updated?", currentCart.items);
 
-			$kookies.set('cart', currentCart);
+			$kookies.set('cart', currentCart, {
+				expires: 60,
+				path: '/'
+			});
 			alert("Item '" + deleted[0].title + "' was deleted from your cart!");
 		},
 
 		addShippingInfo: function(info) {
 				currentCart.shipping = info;
-				$kookies.set('cart', currentCart);
+				$kookies.set('cart', currentCart, {
+					expires: 60,
+					path: '/'
+				});
 				console.log("was currentCart updated?", currentCart);
 			}
 			// 	getOrders: function(sessionId) {

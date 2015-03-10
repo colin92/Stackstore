@@ -31,6 +31,19 @@ app.config(function($stateProvider) {
 
 app.controller('CheckoutCtrl', function($scope, $state) {
   console.log("checkout ctrl activated");
+  $scope.tabs = [{
+    label: "Shipping",
+    state: "checkout.shipping"
+  }, {
+    label: "Billing",
+    state: "checkout.billing"
+  }, {
+    label: "Review",
+    state: "checkout.review"
+  }, {
+    label: "Confirmation",
+    state: "checkout.confirm"
+  }];
 });
 
 app.controller('ShippingCtrl', function($scope, $state, OrderFactory) {

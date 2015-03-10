@@ -1,21 +1,8 @@
 <section id="checkout">
   <div>
     <tabset justified="true">
-      <tab heading="Shipping" ui-sref="checkout.shipping">
-        <h3>Shipping</h3>
-        <!-- <div ui-view="shpping_html"></div> -->
-      </tab>
-      <tab heading="Billing" ui-sref="checkout.billing">
-        <h3>Billing</h3>
-        <!-- <div ui-view></div> -->
-      </tab>
-      <tab heading="Review" ui-sref="checkout.review">
-        <h3>Review</h3>
-        <!-- <div ui-view></div> -->
-      </tab>
-      <tab heading="Confirmation" ui-sref="checkout.confirm">
-        <h3>Confirmation</h3>
-        <!-- <div ui-view></div> -->
+      <tab ng-repeat="tab in tabs" ui-sref="{{ tab.state }}" heading="{{ tab.label }}" active="tab.active">
+        <h3>{{ tab.label }}</h3>
       </tab>
     </tabset>
   </div>
