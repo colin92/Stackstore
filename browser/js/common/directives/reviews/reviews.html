@@ -1,0 +1,9 @@
+<div class="panel panel-default" ng-repeat="review in reviews">
+  <div class="panel-body">
+    <h2>{{ review.title }}
+      <small class="pull-right">{{ review.date | date }}</small>
+    </h2>
+    <p>{{ review.body }}</p>
+    <span ng-repeat="star in createStars(review)" class="pull-right glyphicon glyphicon-star"></span>
+  </div>
+</div>

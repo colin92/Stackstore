@@ -28,6 +28,5 @@ app.controller('CategoryCtrl', function ($scope, $stateParams, $state, ProductFa
 		console.log("we get back products", products);
 		$scope.products = products;
 	});
-	// $scope.showIndividualCategory = ;
 	
 });

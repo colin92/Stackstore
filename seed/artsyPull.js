@@ -4,7 +4,7 @@ var artsySeed = function(findCategory) {
       mongoose = require('mongoose'),
       async = require('async');
 
-  var models = require('./models/schemas'); 
+  var models = require('./../server/db/models/schemas'); 
   var Product = mongoose.model('Product');
 
   var c = console.log.bind(console);
@@ -43,6 +43,7 @@ var artsySeed = function(findCategory) {
               title: artwork.title,
               category: findCategory(artwork.category),
               medium: artwork.medium,
+              price: Math.floor( Math.random() * 10000 ),
               date: artwork.date,
               imageUrl: artwork._links.curies[0].href.replace('{rel}','larger.jpg'),
               thumbnailUrl: artwork._links.thumbnail.href
@@ -98,7 +99,8 @@ var artsySeed = function(findCategory) {
                   );
               },
               function(err) {
-                  console.log("Finished inserting artsy data");
+                  console.log("Finished inserting Artsy data");
+                  console.log("Press Control-C to quit.");
               }
           );
 

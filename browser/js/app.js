@@ -23,7 +23,10 @@ app.controller('MainCtrl', function($scope, ProductFactory, AuthService, Session
   console.log($scope.sessionId);
 
   ProductFactory.getProducts().then(function (products) {
-    $scope.products = products;
+    $scope.products = products.map(function(product) {
+      product.stars = _.range(Math.floor(Math.random() * 5 + 1));
+      return product;
+    }); 
   });
 
   $scope.addToCart = function (sessionId, item) {

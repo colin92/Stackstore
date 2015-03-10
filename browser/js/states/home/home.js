@@ -26,6 +26,9 @@ app.controller('HomeCtrl', function($scope, ProductFactory) {
         source: "https://blackpaint.files.wordpress.com/2011/08/dscn59621.jpg"
     }, {
         title: "img3",
+        source: "http://38.media.tumblr.com/9983b7ab55e724bcb6e782b92186737f/tumblr_nkwwu6FMSc1upg65zo1_1280.gif"
+    }, {
+        title: "img4",
         source: "http://2.bp.blogspot.com/-eSIf06zWnBs/UI6u0ar40hI/AAAAAAAASPg/SHPHvmLbY7g/s1600/Joseph+Mallord+William+Turner+-+The+Slave+Ship.jpg"
     }];
 

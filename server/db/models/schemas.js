@@ -6,6 +6,8 @@ var productSchema = new mongoose.Schema({
 	title: {type: String, required: true, unique: true},
 	category: String, //{type: mongoose.Schema.Types.ObjectId, ref: 'Category', required: true},
 	medium: String,
+  artistName: String,
+  artistNationality: String,
 	date: String,
 	imageUrl: String,
 	thumbnailUrl: String,
