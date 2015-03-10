@@ -2,9 +2,10 @@
 app.directive('products', function () {
     return {
         restrict: 'E',
-        scope: {
-          items: '='
-        },
+        // scope: {
+        //   items: '=',
+        //   search: '='
+        // },
         templateUrl: 'js/common/directives/products/products.html'
     };
 });

@@ -1,5 +1,6 @@
 'use strict';
 
+
 app.controller('AuthCtrl', function($scope, $modal, $log, $rootScope, AUTH_EVENTS, AuthService, OrderFactory) {
   if (AuthService.isAuthenticated()) $scope.loggedIn = true;
   else $scope.loggedIn = false;
@@ -11,24 +12,40 @@ app.controller('AuthCtrl', function($scope, $modal, $log, $rootScope, AUTH_EVENT
     OrderFactory.sendToOrder(currentCart.items);
   };
 
+
   $rootScope.$on(AUTH_EVENTS.loginSuccess, function() {
     // as soon as you log in, send cookie cart items to db
     console.log("just logged in hi");
     $scope.loginSendCookies();
     console.log("login success");
+    console.log('Scope', $scope)
+    logUserIn();
     $scope.loggedIn = true;
+    $scope.$digest;
   });
 
   $rootScope.$on(AUTH_EVENTS.logoutSuccess, function() {
     console.log("logout");
     $scope.loggedIn = false;
+    $scope.user = null;
   });
+
+  $scope.updateSearch = function(search) {
+    $rootScope.search = search
+    console.log('broadcast:', $scope.search, search);
+    $rootScope.$emit('refreshProducts', search);
+  }
 
   $scope.logout = function() {
     AuthService.logout();
   };
 
-  $scope.user = AuthService.getLoggedInUser();
+  function logUserIn() {
+    AuthService.getLoggedInUser().then(function(user) {
+      $scope.user = user.user;
+    });
+  }
+
 
   $scope.open = function(auth) {
 
