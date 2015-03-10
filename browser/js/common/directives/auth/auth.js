@@ -1,11 +1,20 @@
 'use strict';
 
-app.controller('AuthCtrl', function($scope, $modal, $log, $rootScope, AUTH_EVENTS, AuthService) {
+app.controller('AuthCtrl', function($scope, $modal, $log, $rootScope, AUTH_EVENTS, AuthService, OrderFactory) {
   if (AuthService.isAuthenticated()) $scope.loggedIn = true;
   else $scope.loggedIn = false;
 
+  $scope.loginSendCookies = function() {
+    console.log("main controller loginSendCookies called");
+    var currentCart = OrderFactory.getCart();
+    console.log("Throwing cookie cart items to database:", currentCart.items);
+    OrderFactory.sendToOrder(currentCart.items);
+  };
 
   $rootScope.$on(AUTH_EVENTS.loginSuccess, function() {
+    // as soon as you log in, send cookie cart items to db
+    console.log("just logged in hi");
+    $scope.loginSendCookies();
     console.log("login success");
     $scope.loggedIn = true;
   });
@@ -74,6 +83,7 @@ app.controller('ModalInstanceCtrl', function($scope, $modalInstance, auth, AuthS
       });
     } else {
       AuthService.signup($scope.user).then(function() {
+        // as soon as you create account & log in, send cookie cart items to db
         $modalInstance.close("Success!");
       }).catch(function(error) {
         $scope.error = {

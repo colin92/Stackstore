@@ -10,13 +10,6 @@ app.config(function($stateProvider) {
 });
 
 app.controller('CartCtrl', function($scope, OrderFactory, AuthService, $kookies) {
-	// OrderFactory.getOrders(sessionId).then(function(orders){
-	// 	$scope.orders = orders.items;
-	// 	console.log($scope.orders);
-	// });
-
-	if (!AuthService.isAuthenticated()) {
-		$scope.cart = OrderFactory.getCart();
-		$scope.cartItems = $scope.cart.items;
-	}
+	$scope.cart = OrderFactory.getCart();
+	$scope.cartItems = $scope.cart.items;
 });

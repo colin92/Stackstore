@@ -1,8 +1,61 @@
 <div ng-controller="AuthCtrl">
+<!-- <div ng-hide="loggedIn"> -->
+<div class="container">
+	<table id="cart" class="table table-hover table-condensed">
+		<thead>
+			<tr>
+				<th style="width:50%">Product</th>
+				<th style="width:10%">Price</th>
+				<th style="width:8%">Quantity</th>
+				<th style="width:22%" class="text-center">Subtotal</th>
+				<th style="width:10%"></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="item in cartItems">
+				<td data-th="Product">
+					<div class="row">
+						<div class="col-sm-2 hidden-xs"><img ng-src="{{ item.imageUrl }}" alt="..." class="img-rounded img-responsive"/></div>
+						<div class="col-sm-10">
+							<h4 class="nomargin">{{item.title}}</h4>
+							<p>{{item.description}}</p>
+						</div>
+					</div>
+				</td>
+				<td data-th="Price">${{item.price}}</td>
+				<td data-th="Quantity">
+					<input type="number" class="form-control text-center" value="1">
+				</td>
+
+				<td data-th="Subtotal" class="text-center">1.99</td>
+				<td class="actions" data-th="">
+					<!-- refresh button -->
+					<button class="btn btn-info btn-sm"><i class="fa fa-refresh"></i></button>
+					<!-- remove button -->
+					<button class="btn btn-danger btn-sm" ng-click="removeFromCart(item)"><i class="fa fa-trash-o"></i></button>
+				</td>
+			</tr>
+		</tbody>
+		<tfoot>
+			<!-- total price -->
+			<tr class="visible-xs">
+				<td class="text-center"><strong>Total 1.99</strong></td>
+			</tr>
+			<tr>
+				<td><a href="#" class="btn btn-warning" ui-sref="products.all"><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
+				<td colspan="2" class="hidden-xs"></td>
+				<td class="hidden-xs text-center"><strong>Total $1.99</strong></td>
+				<td><a href="#" class="btn btn-success btn-block" ng-click="open('login')">Checkout <i class="fa fa-angle-right"></i></a></td>
+			</tr>
+		</tfoot>
+	</table>
+</div>
+
 	<row>
 		
-		<div class="col-md-9">
-			<div ng-hide="loggedIn">
+		<!-- <div class="col-md-9"> -->
+<!-- 			
+			<div>
 				<ul class="list-group" ng-repeat="item in cartItems">
 					<li>
 						<h3>{{item.title}}</h3> 
@@ -10,19 +63,19 @@
 						<p>Price: {{item.price}}</p>
 						<p>Description: {{item.description}}</p>
 						<!-- <p>Category: {{item.category}}</p> -->
-						<img class="img-rounded img-responsive" src="{{ item.imageUrl }}"/>
-						<button type="button" class="btn btn-danger" ng-click="removeFromCart(sessionId, item)">Remove</button>
+<!-- 						<img class="img-rounded img-responsive" src="{{ item.imageUrl }}"/>
+						<button type="button" class="btn btn-danger">Remove</button>
 					</li>
-				</ul> 
+				</ul>  -->
 
 				
-			</div>
+			<!-- </div> -->
 			
-			<div ng-repeat="item in cartItems" ng-show="loggedIn">
-				{{ item.productId }} - {{ item.price }}  
-			</div>
-			<button type="button" class="btn btn-primary" ng-click="open('login')">Proceed to the Checkout area or login, or signup.</button>
-		</div>
+<!-- 			<div ng-repeat="item in cartItems" ng-show="loggedIn">
+				{{ item }}  
+			</div> -->
+			<!-- <button type="button" class="btn btn-primary">Checkout</button> -->
+		<!-- </div> -->
 		
 	<row>
 </div>

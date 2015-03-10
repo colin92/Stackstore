@@ -7,24 +7,21 @@ app.controller('MainCtrl', function($scope, ProductFactory, AuthService, Session
   // Given to the <navbar> directive to show the menu.
   $scope.menuItems = [{
     label: 'Home',
-    state: 'home',
-    glyphicon: 'glyphicon glyphicon-home'
+    state: 'home'
+      // glyphicon: 'glyphicon glyphicon-home'
   }, {
     label: 'About',
-    state: 'about',
-    glyphicon: 'glyphicon glyphicon-info-sign'
+    state: 'about'
+      // glyphicon: 'glyphicon glyphicon-info-sign'
   }, {
     label: 'Products',
-    state: 'products.all',
-    glyphicon: 'glyphicon glyphicon-gift'
+    state: 'products.all'
+      // glyphicon: 'glyphicon glyphicon-gift'
   }, {
-    label: 'Cart',
+    label: '',
     state: 'cart',
     glyphicon: 'glyphicon glyphicon-shopping-cart'
   }];
-
-  $scope.sessionId = Session.id;
-  console.log("this is session id", $scope.sessionId);
 
   ProductFactory.getProducts().then(function(products) {
     $scope.products = products;
@@ -32,13 +29,20 @@ app.controller('MainCtrl', function($scope, ProductFactory, AuthService, Session
 
   console.log("here are all cookies", $kookies.get());
 
-  $scope.addToCart = function(sessionId, item) {
-    OrderFactory.addToCart(sessionId, item);
+  $scope.addToCart = function(item) {
+    OrderFactory.addToCart(item);
   };
 
-  $scope.removeFromCart = function(sessionId, item) {
-    OrderFactory.removeFromCart(sessionId, item);
+  $scope.removeFromCart = function(item) {
+    OrderFactory.removeFromCart(item);
   };
+
+  // $scope.loginSendCookies = function() {
+  //   console.log("main controller loginSendCookies called");
+  //   var currentCart = OrderFactory.getCart();
+  //   console.log("Throwing cookie cart items to database:", currentCart.items);
+  //   OrderFactory.sendToOrder(currentCart.items);
+  // };
 });
 
 
