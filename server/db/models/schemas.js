@@ -33,7 +33,8 @@ var categorySchema = new mongoose.Schema({
 var reviewSchema = new mongoose.Schema({
 	title: String,
 	body: {type: String, required: true, min: 10},
-	stars: Number, 
+  date: {type: Date, default: Date.now() },
+	stars: {type: Number, default: Math.floor( Math.random() * 5 + 1) },
 	productId: {type: mongoose.Schema.Types.ObjectId, ref: 'Product'},
 	userId: {type: mongoose.Schema.Types.ObjectId, ref: 'User'}
 });
