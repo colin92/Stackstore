@@ -1,26 +1,53 @@
 <section id="home">
-    {{item}}
     <row>
     <div class="col-md-6">
         <!-- image -->
         <img class="img-rounded img-responsive" ng-src="{{item.imageUrl}}">
-        
 
     </div>
     <div class="col-md-6">
         <!-- description -->
         <h1>{{item.title}}</h1>
-        <p>description: {{item.description}}</p>
+        <p>By {{ item.artistName}}</p>
+        <p>Description: A masterpiece, essential for every serious collector's
+          collection, particularly if they are interested in 
+          {{ item.artistNationality }} art. {{item.description}}</p>
         <h4>price: ${{item.price}}</h4>
 
-        <a class="btn btn-success" ng-click="addToCart(item)" role="button">Add to cart</a> 
-
+        <a class="btn btn-success" ng-click="addToCart(sessionId, item)" role="button">Add to cart</a> 
+        <!-- reviews -->
+        <form class="form-horizontal panel-body" name="newReview" ng-submit="createReview()">
+          <div class="alert alert-{{ alert.type }}" ng-show="alert.msg">{{ alert.msg }}</div>
+          <div class="form-group">
+            <input id="title" ng-model="newReview.title" placeholder="Title" class="form-control" type="text">
+          </div>
+          <div class="form-group">
+            <textarea rows="3" ng-model="newReview.body" placeholder="Body" class="form-control"></textarea>
+          </div>
+          <div class="form-group">
+            <label class="control-label">Stars</label>
+            <select ng-model="newReview.stars"  class="form-control">
+              <option ng-repeat="star in [1,2,3,4,5]" value="{{star}}">{{star}} Stars</option>
+            </select>
+          </div>
+          <input type="submit" class="btn btn-primary">
+        </form>
+        <h4>Preview:</h4>
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <h2>{{ newReview.title }}
+              <small class="pull-right">{{ today | date }}</small>
+            </h2>
+            <p>{{ newReview.body }}</p>
+            <span ng-repeat="star in createStars(newReview)" class="pull-right glyphicon glyphicon-star"></span>
+          </div>
+        </div>
     </div>
     </row>
     <row>
-    <div class="col-md-12">
+    <div class="col-md-8">
         <!-- reviews -->
-        <ui-view></ui-view>
+        <reviews></reviews>
     </div>
     </row>
 </section>

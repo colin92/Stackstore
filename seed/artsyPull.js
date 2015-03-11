@@ -4,7 +4,7 @@ var artsySeed = function(findCategory) {
     mongoose = require('mongoose'),
     async = require('async');
 
-  var models = require('./models/schemas');
+  var models = require('./../server/db/models/schemas'); 
   var Product = mongoose.model('Product');
 
   var c = console.log.bind(console);
@@ -49,9 +49,20 @@ var artsySeed = function(findCategory) {
       };
     });
 
-    var links = artworks.map(function(art) {
-      return art._links.artists.href;
-    }).map(requestArtwork);
+      var body = JSON.parse(body);
+      var artworks = body._embedded.artworks;
+
+      var artworkInfo = artworks.map(function (artwork) {
+          return {
+              title: artwork.title,
+              category: findCategory(artwork.category),
+              medium: artwork.medium,
+              price: Math.floor( Math.random() * 10000 ),
+              date: artwork.date,
+              imageUrl: artwork._links.curies[0].href.replace('{rel}','larger.jpg'),
+              thumbnailUrl: artwork._links.thumbnail.href
+          };
+      });
 
     bluebird.all(links).then(function(responses) {
 
@@ -77,16 +88,22 @@ var artsySeed = function(findCategory) {
         return artistInfo;
       });
 
-      artworkInfo.forEach(function(artwork, index) {
-        artwork.artistName = artists[index].name;
-        artwork.artistNationality = artists[index].nationality;
-      });
+          console.log(dataForDB);
 
-      // Seeding
-
-      var dataForDB = {
-        Product: artworkInfo
-      };
+          async.each(Object.keys(dataForDB),
+              function(modelName, outerDone) {
+                  async.each(dataForDB[modelName],
+                      function(d, innerDone) {
+                          models[modelName].create(d, innerDone);
+                      },
+                      outerDone
+                  );
+              },
+              function(err) {
+                  console.log("Finished inserting Artsy data");
+                  console.log("Press Control-C to quit.");
+              }
+          );
 
       console.log(dataForDB);
 

@@ -10,6 +10,8 @@ var productSchema = new mongoose.Schema({
 	},
 	category: String, //{type: mongoose.Schema.Types.ObjectId, ref: 'Category', required: true},
 	medium: String,
+  artistName: String,
+  artistNationality: String,
 	date: String,
 	imageUrl: String,
 	thumbnailUrl: String,
@@ -41,20 +43,11 @@ var categorySchema = new mongoose.Schema({
 
 var reviewSchema = new mongoose.Schema({
 	title: String,
-	body: {
-		type: String,
-		required: true,
-		min: 10
-	},
-	stars: Number,
-	productId: {
-		type: mongoose.Schema.Types.ObjectId,
-		ref: 'Product'
-	},
-	userId: {
-		type: mongoose.Schema.Types.ObjectId,
-		ref: 'User'
-	}
+	body: {type: String, required: true, min: 10},
+  date: {type: Date, default: Date.now() },
+	stars: {type: Number, default: Math.floor( Math.random() * 5 + 1) },
+	productId: {type: mongoose.Schema.Types.ObjectId, ref: 'Product'},
+	userId: {type: mongoose.Schema.Types.ObjectId, ref: 'User'}
 });
 
 module.exports = {
