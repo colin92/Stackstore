@@ -1,14 +1,14 @@
 var mongoose = require('mongoose');
 var async = require('async'),
-  models = require('./server/db/models/schemas.js');
+  models = require('./../server/db/models/schemas.js');
 
 var _ = require('lodash');
 
 var path = require('path');
 
-var artsyPull = require('./server/db/artsyPull.js');
+var artsyPull = require('./artsyPull.js');
 
-var DATABASE_URI = require(path.join(__dirname, 'server/env')).DATABASE_URI;
+var DATABASE_URI = require(path.join(__dirname, '../server/env')).DATABASE_URI;
 
 var db = mongoose.connect(DATABASE_URI).connection;
 
@@ -85,7 +85,7 @@ mongoose.connection.on('open', function() {
       artsySeed
     ], function(err, result) {
       if (err) console.log(err);
-      console.log('finished, press Control-C to quit.');
+      console.log('Finished inserting almost everything in the universe.');
     });
 
     function loadingCategories(callback) {

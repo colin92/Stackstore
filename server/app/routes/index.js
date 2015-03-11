@@ -125,6 +125,27 @@ router.post('/orders/send', function(req, res) {
 });
 
 
+// Review CRUD routes
+router.post('/review/create', function(req, res) {
+  if(!req.user) res.sendStatus(401).end(); 
+  else {
+    var review = new Model.Review(req.body.data);
+    review.userId = req.user._id;
+    review.save(function(err, review) {
+      if(err) res.json(err);
+      else res.json(review);
+    });
+  }
+});
+
+router.get('/reviews/:productid', function(req, res) {
+  var productId = req.params.productid;
+  Model.Review.find({productId: productId}, function(err, reviews) {
+    if(err) res.json(err);
+    else res.json(reviews);
+  });
+});
+
 function getProduct(product, done) {
   Model.Product.findOne({
     _id: product._id

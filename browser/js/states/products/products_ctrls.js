@@ -34,14 +34,14 @@ app.controller('AllProductsCtrl', function($scope, $state, $rootScope, ProductFa
 
 });
 
-app.controller('CategoryCtrl', function($scope, $stateParams, $state, ProductFactory) {
-  var selected = $stateParams.categoryName;
-  // loop through $scope.categories, search by "selected category name", find the categoryId that matches it
-  // assign it to var selectedId;
+app.controller('CategoryCtrl', function ($scope, $stateParams, $state, ProductFactory) {
+	var selected = $stateParams.categoryName;
+	// loop through $scope.categories, search by "selected category name", find the categoryId that matches it
+	// assign it to var selectedId;
 
-  ProductFactory.getProducts(selected).then(function(products) {
-    $scope.products = products;
-  });
-  // $scope.showIndividualCategory = ;
-
+	ProductFactory.getProducts(selected).then(function (products) {
+		console.log("we get back products", products);
+		$scope.products = products;
+	});
+	
 });
