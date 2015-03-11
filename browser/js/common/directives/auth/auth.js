@@ -16,7 +16,7 @@ app.controller('AuthCtrl', function($scope, $modal, $log, $rootScope, AUTH_EVENT
   $rootScope.$on(AUTH_EVENTS.loginSuccess, function() {
     // as soon as you log in, send cookie cart items to db
     console.log("just logged in hi");
-    $scope.loginSendCookies();
+    // $scope.loginSendCookies();
     console.log("login success");
     console.log('Scope', $scope)
     logUserIn();
