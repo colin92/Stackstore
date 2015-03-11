@@ -61,12 +61,9 @@ app.controller('MainCtrl', function($scope, ProductFactory, AuthService, Session
     OrderFactory.removeFromCart(item);
   };
 
-  // $scope.loginSendCookies = function() {
-  //   console.log("main controller loginSendCookies called");
-  //   var currentCart = OrderFactory.getCart();
-  //   console.log("Throwing cookie cart items to database:", currentCart.items);
-  //   OrderFactory.sendToOrder(currentCart.items);
-  // };
+  $scope.updateCart = function(cartItems) {
+    OrderFactory.updateCart(cartItems);
+  }
 });
 
 

@@ -6,6 +6,17 @@ app.factory('OrderFactory', function($http, $kookies, AuthService) {
 		getCart: function() {
 			return currentCart;
 		},
+		updateCart: function(cartItems) {
+			console.log("cartItems in OrderFactory", cartItems);
+			if (!AuthService.isAuthenticated()) {
+				currentCart.items = cartItems;
+				$kookies.set('cart', currentCart, {
+					expires: 60,
+					path: '/'
+				});
+				alert("Cart has been updated!");
+			} 
+		},
 		// sends existing cart in cookie to order associated with user in db
 		sendToOrder: function(cart) {
 			console.log("this is the function that sends cookie cart to order found in db");
@@ -30,11 +41,11 @@ app.factory('OrderFactory', function($http, $kookies, AuthService) {
 					});
 
 					currentCart = $kookies.get('cart');
-
 					currentCart.items.push(item);
 					console.log(currentCart);
 					alert("Item added to cart!");
 				} else {
+
 					currentCart.items.push(item);
 					console.log(currentCart);
 					$kookies.set('cart', currentCart, {
