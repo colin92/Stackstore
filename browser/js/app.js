@@ -56,6 +56,7 @@ app.controller('MainCtrl', function($scope, ProductFactory, AuthService, Session
   console.log("here are all cookies", $kookies.get());
 
   $scope.addToCart = function(item) {
+    console.log("is it there", item);
     OrderFactory.addToCart(item);
   };
 

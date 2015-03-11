@@ -14,7 +14,7 @@
           {{ item.artistNationality }} art. {{item.description}}</p>
         <h4>price: ${{item.price}}</h4>
 
-        <a class="btn btn-success" ng-click="addToCart(sessionId, item)" role="button">Add to cart</a> 
+        <a class="btn btn-success" ng-click="addToCart(item)" role="button">Add to cart</a> 
         <!-- reviews -->
         <form class="form-horizontal panel-body" name="newReview" ng-submit="createReview()">
           <div class="alert alert-{{ alert.type }}" ng-show="alert.msg">{{ alert.msg }}</div>
