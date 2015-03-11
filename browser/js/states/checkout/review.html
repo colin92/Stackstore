@@ -1,0 +1,60 @@
+<h1>this is the REVIEW state</h1>
+<row>
+  <!-- order cart items -->
+  <div class="col-md-4" id="cart-items">
+    <div class="panel panel-primary" id="cart-info">
+      <div class="panel-heading">
+        Order Items
+      </div>
+      <ul class="list-group" ng-repeat="item in cartItems">
+        <li>
+              <h4 class="list-group-item=heading">{{item.title}}</h3> 
+              <p class="list-group-item-text">Price: {{item.price}}</p>
+              <p class="list-group-item-text">Description: {{item.description}}</p>
+              <!-- <p>Category: {{item.category}}</p> -->
+              <img class="img-rounded img-responsive" src="{{ item.imageUrl }}"/>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <!-- end of cart items -->
+
+  <!-- shipping info -->
+  <div class="col-md-4" id="shipping-info">
+    <div class="panel panel-primary" id="shipping-info">
+      <div class="panel-heading">
+        Shipping Information
+      </div>
+      <div class="panel-body">
+        <p>Name: {{ shippingInfo.firstName }} {{ shippingInfo.lastName }}</p>
+        <p>Email: {{ shippingInfo.email }}</p>
+        <p>Phone: {{ shippingInfo.phone }}</p>
+        <p>Address: {{ shippingInfo.address1 }}</p>
+        <p>{{ shippingInfo.address2 }}</p>
+        <p>{{ shippingInfo.city }}, {{ shippingInfo.state }}</p>
+        <p>{{ shippingInfo.country }}</p>
+      </div>
+    </div>
+  </div>
+  <!-- end of shipping info -->
+
+  <!-- billing info -->
+  <div class="col-md-4" id="billing-info">
+    <div class="panel panel-primary" id="billing-info">
+      <div class="panel-heading">
+        billing Information
+      </div>
+      <div class="panel-body">
+        <p>Name: {{ billingInfo.firstName }} {{ billingInfo.lastName }}</p>
+      </div>
+    </div>
+  </div>
+  <!-- end of billing info -->
+
+
+</row>
+<row>
+  <div>
+    <button class="btn btn-default" ui-sref="{{ tabs[3].state }}" ng-click="tabs[3].active = true">Next</button>
+  </div>
+</row>

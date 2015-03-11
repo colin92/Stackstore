@@ -13,7 +13,6 @@ app.config(function($stateProvider) {
 app.controller('HomeCtrl', function($scope, ProductFactory) {
     ProductFactory.getCategories().then(
         function(categories) {
-            console.log("categories got in appjs", categories);
             $scope.categories = categories;
         }
     );

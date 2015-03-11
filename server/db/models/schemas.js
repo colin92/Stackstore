@@ -1,9 +1,13 @@
 var mongoose = require('mongoose'),
 	user = require('./user');
-	
+
 
 var productSchema = new mongoose.Schema({
-	title: {type: String, required: true, unique: true},
+	title: {
+		type: String,
+		required: true,
+		unique: true
+	},
 	category: String, //{type: mongoose.Schema.Types.ObjectId, ref: 'Category', required: true},
 	medium: String,
   artistName: String,
@@ -18,15 +22,22 @@ var productSchema = new mongoose.Schema({
 var orderSchema = new mongoose.Schema({
 	// Needs to either have a user OR session
 	userId: String,
-	sessionId: String,
-	items: [{productId: {type: mongoose.Schema.Types.ObjectId, ref: 'Product'},
-			quantity: Number,
-			price: Number}]
+	items: [{
+		productId: {
+			type: mongoose.Schema.Types.ObjectId,
+			ref: 'Product'
+		},
+		quantity: Number,
+		price: Number
+	}]
 });
 
 var categorySchema = new mongoose.Schema({
 	// for each product
-	name: {type: String, required: true}
+	name: {
+		type: String,
+		required: true
+	}
 });
 
 

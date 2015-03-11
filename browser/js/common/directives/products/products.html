@@ -1,11 +1,11 @@
 <div class="row">
-    <div class="col-sm-4 col-lg-4 col-md-4" ng-repeat="product in items">
+    <div class="col-sm-4 col-lg-4 col-md-4" ng-repeat="product in products | filter:search">
         <div class="thumbnail">
             <img src="{{ product.thumbnailUrl }}" alt="{{ product.title }}">
             <div class="caption">
                 <h4 class="pull-right">${{ product.price }}</h4>
-                <h4><a ui-sref="item({ item: product.title })">{{ product.title }}</a>
-                </h4>
+                <h4><a ui-sref="item({ item: product.title })">{{ product.title | limitTo: 80 }}</a></h4>
+                
                 <p>{{ product.artistName }}</p>
             </div>
             <div class="ratings">
